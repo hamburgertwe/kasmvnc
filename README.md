@@ -34,12 +34,13 @@ as expected compared with a supported local device and browser.
 3. Open the deployed service's `onrender.com` URL.
 
 Render runs Chromium directly rather than running the Codespaces Docker-in-Docker
-startup command. The Blueprint selects Render's paid `1c-2g` plan (1 CPU, 2 GB
-RAM) to avoid the free instance's severe memory and CPU limits. The Render image
-defaults to 1280x720 at 30 FPS and 4 Mbps to reduce software-encoding load. This
-is still CPU-only, so performance may be limited compared with a local device
-or a service with a GPU. The filesystem is ephemeral, so browser profile
-changes do not survive redeploys or instance restarts.
+startup command. The Blueprint selects Render's free plan (0.1 CPU, 512 MB RAM).
+The Render image defaults to 1280x720 at 30 FPS and 4 Mbps to reduce
+software-encoding load, but Chromium may still run slowly or run out of memory
+with the free plan. For more headroom, change the plan to `1c-2g` (1 CPU, 2 GB
+RAM) in `render.yaml`; Render has no GPU on either plan. The filesystem is
+ephemeral, so browser profile changes do not survive redeploys or instance
+restarts.
 
 The browser UI includes a terminal with passwordless `sudo`. LinuxServer
 recommends a robust authentication proxy for internet-facing deployments;
